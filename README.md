@@ -1,10 +1,10 @@
 # Blockchain Query Blocklet Demo
 
-This project is an demo [blocklet](https://www.arcblock.io/en/blocklets) for viewing BTC blockchain information by block hash
+This project is an demo [blocklet](https://www.arcblock.io/en/blocklets) for viewing BTC blockchain information by block hash.
 
 ![Screen Shot](./screenshots/query-result.png)
 
-## Development
+## Development & Deployment
 
 In the project directory, you can run:
 
@@ -15,15 +15,13 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 Also a graphql server [http://localhost:3030/graphql](http://localhost:3030/graphql) for backend.
 
-### `yarn build`
+### `yarn bundle`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Build blocklet bundle
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### `blocklet deploy .blocklet/bundle`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Deploy blocklet to abtnode
 
 ## Tech Specs
 
@@ -31,6 +29,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
   * [express.js](http://expressjs.com/) for api server
   * [graphql.js](https://graphql.org/graphql-js/) for graphql server
   * [@abtnode/nedb](https://www.npmjs.com/package/@abtnode/nedb) for blockchain data caching
+  * [blockchain api](https://www.blockchain.com/api/blockchain_api) `https://blockchain.info/rawblock/$block_hash`
 * Client
   * [Apollo](https://www.apollographql.com/) graphql client for data fetching
   * [Material-UI](https://material-ui.com/) for UI components
