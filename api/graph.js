@@ -10,18 +10,18 @@ const schema = buildSchema(`
 
   type BlockInfo {
     hash: String
-    ver: Int
+    ver: Float
     prev_block: String
     mrkl_root: String
-    time: Int
-    bits: Int
-    nonce: Int
-    n_tx: Int
-    size: Int
-    block_index: Int
+    time: Float
+    bits: Float
+    nonce: Float
+    n_tx: Float
+    size: Float
+    block_index: Float
     main_chain: Boolean
-    height: Int
-    received_time: Int
+    height: Float
+    received_time: Float
     relayed_by: String
     tx: [Transaction]
   }
