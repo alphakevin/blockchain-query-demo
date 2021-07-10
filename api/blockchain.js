@@ -1,6 +1,8 @@
 const path = require('path');
 const util = require('util');
-const fetch = require('node-fetch');
+// not support by blocklet
+// const fetch = require('node-fetch');
+const axios = require('axios');
 const DataStore = require('@abtnode/nedb');
 
 const baseDir = process.env.BLOCKLET_DATA_DIR || './';
@@ -30,14 +32,19 @@ class BlockchainInfo {
     if (!/^[\da-z]{64}/i.test(hash)) {
       throw new TypeError('invalid block hash format');
     }
-    const res = await fetch(`https://blockchain.info/rawblock/${hash}`);
-    if (res.status !== 200) {
-      throw new Error(`fetch blockchain error with code ${res.status}`);
-    }
-    const data = await res.json();
-    return {
-      ...data,
-      tx: data.tx.map(({ hash }) => ({ hash })),
+    // const res = await fetch(`https://blockchain.info/rawblock/${hash}`);
+    // if (res.status !== 200) {
+    //   throw new Error(`fetch blockchain error with code ${res.status}`);
+    // }
+    // const data = await res.json();
+    try {
+      const { data } = await axios.get(`https://blockchain.info/rawblock/${hash}`);
+      return {
+        ...data,
+        tx: data.tx.map(({ hash }) => ({ hash })),
+      }
+    } catch(err) {
+      throw new Error('unable to fetch block chain info');
     }
   }
 

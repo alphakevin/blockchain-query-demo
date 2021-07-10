@@ -40,4 +40,8 @@ exports.graphqlRoute = graphqlHTTP({
   schema: schema,
   rootValue: root,
   graphiql: true,
+  customFormatErrorFn: (err) => {
+    console.dir(err);
+    return err.message + '\n' + err.stack;
+  }
 });
