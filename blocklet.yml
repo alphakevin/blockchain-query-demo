@@ -1,15 +1,22 @@
-name: blocklet-demo
-description: BlockChain info query
-group: dapp
-main: .
+name: blockchain-query-demo
+version: 1.0.0
+main: api/index.js
 author:
   name: alphakevin
+license: ''
+title: Blockchain Query Demo
+description: This project is an demo blocklet for viewing BTC blockchain information by block hash
+group: dapp
 specVersion: 1.1.1
-version: 1.0.0
 files:
   - blocklet.md
   - README.md
   - build
+keywords:
+  - dapp
+  - demo
+  - btc
+  - blockchain
 interfaces:
   - type: web
     name: publicUrl
@@ -17,28 +24,24 @@ interfaces:
     prefix: '*'
     port: BLOCKLET_PORT
     protocol: http
-    services:
-      - name: '@alphakevin/blocklet-demo'
-        config:
-          blockUnauthenticated: false
 did: z8iZueEP9y4RX4LTQkwUe27ASe74L9riRWV2Q
 community: ''
 documentation: ''
 homepage: ''
-license: ''
-charging:
-  price: 0
-  tokens: []
-  shares: []
 timeout:
   start: 60
 requirements:
-  abtnode: '>=1.2.0'
+  abtnode: '>=1.2.5'
   os: '*'
   cpu: '*'
 environments: []
 scripts:
   dev: npm run start
-capabilities: {}
 screenshots: []
 children: []
+charging:
+  price: 0
+  tokens: []
+  shares: []
+capabilities:
+  clusterMode: false

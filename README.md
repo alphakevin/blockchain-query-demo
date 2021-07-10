@@ -1,4 +1,4 @@
-# Blocklet Demo
+# Blockchain Query Blocklet Demo
 
 This project is an demo [blocklet](https://www.arcblock.io/en/blocklets) for viewing BTC blockchain information by block hash
 

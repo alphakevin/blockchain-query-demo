@@ -14,8 +14,10 @@ import {
   ApolloProvider,
 } from "@apollo/client";
 
+const publicUrl = process.env.PUBLIC_URL;
+
 const client = new ApolloClient({
-  uri: 'http://127.0.0.1:3030/graphql',
+  uri: `${publicUrl || 'http://127.0.0.1:3030'}/graphql`,
   cache: new InMemoryCache()
 });
 

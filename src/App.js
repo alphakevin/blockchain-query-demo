@@ -4,7 +4,6 @@ import './App.css';
 import { Link, Route } from "react-router-dom";
 import BlockQuery from './components/BlockQuery';
 import BlockDetail from './components/BlockDetail';
-import { Typography } from '@material-ui/core';
 
 function App() {
   return (
