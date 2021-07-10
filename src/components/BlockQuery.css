@@ -1,0 +1,17 @@
+.BlockQuery {
+  width: 720px;
+  max-width: 80vw;
+  margin: 20px auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.BlockQuery-input {
+  flex-grow: 1;
+}
+
+.BlockQuery-button {
+  flex-shrink: 0;
+  flex-grow: 0;
+  margin-left: 8px;
+}
