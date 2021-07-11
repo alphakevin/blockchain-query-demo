@@ -50,7 +50,7 @@ export default function TransactionList(props) {
               }}
             >
               <ListItemText
-                primary={`${virtualRow.index} - ${hash}`}
+                primary={`${virtualRow.index + 1} - ${hash}`}
               />
             </ListItem>
           );
