@@ -12,7 +12,6 @@ export default function BlockQuery() {
   const { hash: routeHash } = useParams();
   const prevRouteHash = usePrevious(routeHash);
 
-  console.log({ hash, routeHash, prevRouteHash });
   useEffect(() => {
     if (routeHash && routeHash !== prevRouteHash && hash !== routeHash) {
       setHash(routeHash);

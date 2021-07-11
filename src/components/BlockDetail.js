@@ -58,20 +58,24 @@ const BLOCKCHAIN_INFO = gql`
   }
 `;
 
+const formatTime = (t) => new Date(t * 1000).toLocaleString();
+const formatVersion = (v) => '0x' + v.toString(16);
+const formatNumber = (n) => n.toLocaleString();
+
 const dataFields = [
   { label: 'Hash', field: 'hash' },
   // { label: 'Confirmations', field: '' },
-  { label: 'Timestamp', field: 'time' },
+  { label: 'Timestamp', field: 'time', format: formatTime },
   { label: 'Height', field: 'height' },
   // { label: 'Miner', field: '' },
   { label: 'Number of Transactions', field: 'n_tx' },
   // { label: 'Difficulty', field: '' },
   { label: 'Merkle root', field: 'mrkl_root' },
-  { label: 'Version', field: 'ver' },
+  { label: 'Version', field: 'ver', format: formatVersion },
   { label: 'Bits', field: 'bits' },
   // { label: 'Weight', field: '' },
-  { label: 'Size', field: 'size' },
-  { label: 'Nonce', field: 'nonce' },
+  { label: 'Size', field: 'size', format: formatNumber, unit: 'bytes' },
+  { label: 'Nonce', field: 'nonce', format: formatNumber },
   // { label: 'Transaction Volume', field: '' },
   // { label: 'Block Reward', field: '' },
   // { label: 'Fee Reward', field: '' },
@@ -119,10 +123,10 @@ export default function BlockDetail() {
           <TableContainer>
             <Table className={classes.table} aria-label="simple table">
               <TableBody>
-                {dataFields.map(({ label, field}) => (
+                {dataFields.map(({ label, field, format, unit }) => (
                   <TableRow key={label}>
                     <TableCell>{label}</TableCell>
-                    <TableCell>{rawBlock[field]}</TableCell>
+                    <TableCell>{format ? format(rawBlock[field]) : rawBlock[field]}{unit ? ` ${unit}` : ''}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
