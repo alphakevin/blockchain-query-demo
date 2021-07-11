@@ -1,7 +1,7 @@
 import logo from './Bitcoin_logo.svg';
 import './App.css';
 
-import { Link, Route } from "react-router-dom";
+import { Link, Route, Switch } from "react-router-dom";
 import BlockQuery from './components/BlockQuery';
 import BlockDetail from './components/BlockDetail';
 
@@ -16,7 +16,10 @@ function App() {
           Input block hash to get block information
         </div>
       </header>
-      <BlockQuery />
+      <Switch>
+        <Route path="/" exact component={BlockQuery} />
+        <Route path="/hash/:hash" exact component={BlockQuery} />
+      </Switch>
       <Route path="/hash/:hash" component={BlockDetail} />
     </div>
   );

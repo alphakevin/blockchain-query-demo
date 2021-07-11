@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { gql, useQuery } from "@apollo/client";
 import {
@@ -32,7 +32,7 @@ const useStyles = makeStyles({
   },
 });
 
-const hashPattern = /^[\da-f]{64}$/i 
+const isValidHash = (hash) => /^[\da-f]{64}$/i.test(hash);
 
 const BLOCKCHAIN_INFO = gql`
   query Query($hash: String!) {
@@ -80,9 +80,17 @@ const dataFields = [
 export default function BlockDetail() {
   const classes = useStyles();
   const { hash } = useParams();
-  const { loading, error, data } = useQuery(BLOCKCHAIN_INFO, {
-    variables: { hash }
+  const { loading, error, data, refetch } = useQuery(BLOCKCHAIN_INFO, {
+    variables: { hash },
+    skip: !isValidHash(hash),
   });
+
+  useEffect(() => {
+    console.log('refetch data ...')
+    if (isValidHash(hash)) {
+      refetch({ hash });
+    }
+  }, [hash]);
 
   const { rawBlock } = data || {};
   const gotoBlockDetail = (hash) => window.open(`https://www.blockchain.com/btc/block/${hash}`, '_blank');
@@ -91,7 +99,7 @@ export default function BlockDetail() {
     return (
       <Typography>Please input hash and click Search</Typography>
     )
-  } else if (!hashPattern.test(hash)) {
+  } else if (!isValidHash(hash)) {
     return (
       <Typography>Please input correct block hash</Typography>
     )
@@ -99,7 +107,7 @@ export default function BlockDetail() {
     return (
       <Typography><CircularProgress /></Typography>
     )
-  } else if (error) {
+  } else if (!data && error) {
     return (
       <Typography color="error">Error: {error.message}</Typography>
     )

@@ -1,6 +1,7 @@
 import { Button, TextField } from '@material-ui/core';
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import { usePrevious } from '../hooks';
 import './BlockQuery.css';
 
 const defaultHash = '00000000000000000007878ec04bb2b2e12317804810f4c26033585b3f81ffaa';
@@ -8,12 +9,22 @@ const defaultHash = '00000000000000000007878ec04bb2b2e12317804810f4c26033585b3f8
 export default function BlockQuery() {
   const [hash, setHash] = React.useState(defaultHash);
   const history = useHistory();
+  const { hash: routeHash } = useParams();
+  const prevRouteHash = usePrevious(routeHash);
+
+  console.log({ hash, routeHash, prevRouteHash });
+  useEffect(() => {
+    if (routeHash && routeHash !== prevRouteHash && hash !== routeHash) {
+      setHash(routeHash);
+    } 
+  }, [hash, routeHash, prevRouteHash]);
+  
   const handleChange = (event) => setHash(event.target.value);
   const handleSearch = (event) => {
     console.log('search block', hash, '...');
     history.push(`/hash/${hash}`);
   }
-  
+
   return (
     <div className="BlockQuery">
       <div className="BlockQuery-input">
@@ -21,9 +32,6 @@ export default function BlockQuery() {
           fullWidth
           value={hash}
           onChange={handleChange}
-          inputProps={{
-            onClick: event => event.currentTarget.select()
-          }}
         />
       </div>
       <div className="BlockQuery-button">
