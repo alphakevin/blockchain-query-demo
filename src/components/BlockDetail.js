@@ -12,11 +12,9 @@ import {
   Typography,
   Paper,
   makeStyles,
-  List,
-  ListItem,
-  ListItemText,
   Button,
 } from '@material-ui/core';
+import TransactionList from './TransactionList';
 
 const useStyles = makeStyles({
   root: {
@@ -30,6 +28,7 @@ const useStyles = makeStyles({
   },
   transactions: {
     marginTop: 20,
+    marginBottom: 20,
   },
 });
 
@@ -86,7 +85,6 @@ export default function BlockDetail() {
   });
 
   const { rawBlock } = data || {};
-  const gotoTxDetail = (hash) => window.open(`https://www.blockchain.com/btc/tx/${hash}`, '_blank');
   const gotoBlockDetail = (hash) => window.open(`https://www.blockchain.com/btc/block/${hash}`, '_blank');
 
   if (!hash) {
@@ -125,19 +123,10 @@ export default function BlockDetail() {
           <div className={classes.actions}>
             <Button onClick={event => gotoBlockDetail(rawBlock.hash)}>More Information</Button>
           </div>
-          <h3>Transactions</h3>
-          <List className={classes.transactions}>
-            {rawBlock.tx.map(({ hash }, i) => (
-              <ListItem
-                key={hash}
-                button onClick={event => gotoTxDetail(hash)}
-              >
-                <ListItemText
-                  primary={`${i} - ${hash}`}
-                />
-              </ListItem>
-            ))}
-          </List>
+          <h3>Block Transactions</h3>
+          <div className={classes.transactions}>
+            <TransactionList tx={rawBlock.tx} />
+          </div>
         </Paper>
       </section>
     );

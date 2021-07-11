@@ -31,8 +31,9 @@ Deploy blocklet to abtnode
   * [@abtnode/nedb](https://www.npmjs.com/package/@abtnode/nedb) for blockchain data caching
   * [blockchain api](https://www.blockchain.com/api/blockchain_api) `https://blockchain.info/rawblock/$block_hash`
 * Client
-  * [Apollo](https://www.apollographql.com/) graphql client for data fetching
+  * [Apollo](https://www.apollographql.com/) graphql client for data fetching & state management
   * [Material-UI](https://material-ui.com/) for UI components
+  * [react-virtual](https://github.com/tannerlinsley/react-virtual) for quick rendering large amount of transactions
 
 ## License
 
